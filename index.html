@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Rifare l’esercizio della to do list">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Vue To Do List</title>
+
+    <!-- Framework bootstrap css  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <!-- Framework bootstrap js  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+    <!-- Framework Vuejs  -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- Custom css  -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <div id="app">
+        <h1 class="text-center my-3">ToDoList</h1>
+
+        <!-- Input -->
+        <div class="input-container d-flex justify-content-center mt-3">
+            <div class="form-floating mb-3 new-task-input">
+                <input class="form-control" id="floatingInput" v-model="newTask" @keydown.enter="addNewTask()">
+                <label for="floatingInput">Inserisci nuovo task</label>
+            </div>
+        </div>
+        
+        <!-- To Do List -->
+        <div class="list-container d-flex justify-content-center mt-3">
+            <ul class="list-group">
+                <li v-for="(toDoItem, i) in toDoList"
+                    class="list-group-item d-flex justify-content-between align-items-center gap-2">
+
+                    <div class="flex-grow-1" v-bind:class="toDoItem.done == true ? 'text-decoration-line-through' : ''"
+                        @click="changeDoneValue(i)">
+                        {{toDoItem.text}}
+                    </div>
+                    <button class="btn bg-danger text-white" @click="deleteToDoItem(toDoItem.id)">X</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
